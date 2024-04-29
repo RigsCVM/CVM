@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Emotional State Survey</title>
+    <style>
+        .emoticon {
+            font-size: 3em; /* Adjust the size as needed */
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Customer Emotional State Survey</h1>
+    <form id="surveyForm" action="https://script.google.com/macros/s/AKfycbw-MqpRe0sWeGzUc5I-8bavCbxzyybBggRHYq3BbmhwV-nIVlYuYc_QmKr8xkImKvmP/exec" method="POST">
+        <input type="hidden" id="emotion" name="emotion">
+        <select id="branch" name="branch">
+            <option value="">Select Branch</option>
+            <option value="Bagong Silang">Bagong Silang</option>
+            <!-- Add branch options here -->
+        </select>
+    </form>
+    <div id="emoticonContainer">
+        <span class="emoticon" onclick="setEmotion('Very Happy')">😄</span>
+        <span class="emoticon" onclick="setEmotion('Happy')">🙂</span>
+        <span class="emoticon" onclick="setEmotion('Just OK')">😐</span>
+        <span class="emoticon" onclick="setEmotion('Sad')">😢</span>
+        <span class="emoticon" onclick="setEmotion('Angry')">😡</span>
+    </div>
+
+    <script>
+        function setEmotion(emotion) {
+            document.getElementById('emotion').value = emotion;
+            document.getElementById('surveyForm').submit();
+        }
+    </script>
+</body>
+</html>
