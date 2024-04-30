@@ -3,36 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Emotional State Survey</title>
+    <title>Happy or Not</title>
     <style>
+        body {
+            display: flex;
+            flex-direction: column; /* Align items vertically */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-size: 2vw; /* Adjust font size relative to the viewport width */
+        }
+        .container {
+            text-align: center;
+            max-width: 80%; /* Adjust the maximum width as needed */
+            margin: 0 auto; /* Center the container horizontally */
+            padding: 0 10px; /* Add some padding for better appearance */
+        }
+        .logo {
+            max-width: 100px; /* Adjust the maximum width of the logo */
+            margin-bottom: 20px; /* Add some margin below the logo */
+        }
         .emoticon {
-            font-size: 3em; /* Adjust the size as needed */
+            font-size: 10vw; /* Adjust emoticon size relative to the viewport width */
             cursor: pointer;
+            margin: 0 1vw; /* Add margin to separate emoticons */
+            vertical-align: middle; /* Align emoticons vertically */
+        }
+        .loading {
+            display: none;
+            margin-top: 10px;
+        }
+        .success {
+            display: none;
+            color: green;
         }
     </style>
 </head>
 <body>
-    <h1>Customer Emotional State Survey</h1>
-    <form id="surveyForm" action="https://script.google.com/macros/s/AKfycbw-MqpRe0sWeGzUc5I-8bavCbxzyybBggRHYq3BbmhwV-nIVlYuYc_QmKr8xkImKvmP/exec" method="POST">
-        <input type="hidden" id="emotion" name="emotion">
-        <select id="branch" name="branch">
-            <option value="">Select Branch</option>
-            <option value="Bagong Silang">Bagong Silang</option>
-            <!-- Add branch options here -->
-        </select>
-    </form>
-    <div id="emoticonContainer">
-        <span class="emoticon" onclick="setEmotion('Very Happy')">😄</span>
-        <span class="emoticon" onclick="setEmotion('Happy')">🙂</span>
-        <span class="emoticon" onclick="setEmotion('Just OK')">😐</span>
-        <span class="emoticon" onclick="setEmotion('Sad')">😢</span>
-        <span class="emoticon" onclick="setEmotion('Angry')">😡</span>
+    <div class="container">
+        <h1>How satisfied are you with our services today?</h1>
+        <div id="status"></div>
+        <div class="loading">Submitting...</div>
+        <div class="success">Thank you</div>
+        <form id="surveyForm">
+            <input type="hidden" id="emotion" name="emotion">
+            <select id="branch" name="branch">
+                <option value="Camarin">Camarin</option>
+                <!-- Add branch options here -->
+            </select>
+        </form>
+        <div id="emoticonContainer">
+            <span class="emoticon" onclick="setEmotion('Very Happy')">😄</span>
+            <span class="emoticon" onclick="setEmotion('Happy')">🙂</span>
+            <span class="emoticon" onclick="setEmotion('Just OK')">😐</span>
+            <span class="emoticon" onclick="setEmotion('Sad')">😢</span>
+            <span class="emoticon" onclick="setEmotion('Angry')">😡</span>
+        </div>
     </div>
 
     <script>
         function setEmotion(emotion) {
             document.getElementById('emotion').value = emotion;
-            document.getElementById('surveyForm').submit();
+            document.querySelector('.loading').style.display = 'block';
+            document.getElementById('emoticonContainer').style.display = 'none';
+            submitForm();
+        }
+
+        function submitForm() {
+            var form = document.getElementById('surveyForm');
+            var formData = new FormData(form);
+
+            fetch('https://script.google.com/macros/s/AKfycbw-MqpRe0sWeGzUc5I-8bavCbxzyybBggRHYq3BbmhwV-nIVlYuYc_QmKr8xkImKvmP/exec', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    document.getElementById('status').innerHTML = '';
+                    document.querySelector('.loading').style.display = 'none';
+                    document.querySelector('.success').style.display = 'block';
+                    setTimeout(function() {
+                        document.querySelector('.success').style.display = 'none';
+                        document.getElementById('emoticonContainer').style.display = 'flex';
+                    }, 5000); // Show emoticons again after 5 seconds
+                } else {
+                    document.getElementById('status').innerHTML = 'Error';
+                    document.querySelector('.loading').style.display = 'none';
+                    document.getElementById('emoticonContainer').style.display = 'flex';
+                }
+            })
+            .catch(error => {
+                document.getElementById('status').innerHTML = 'Error: ' + error.message;
+                document.querySelector('.loading').style.display = 'none';
+                document.getElementById('emoticonContainer').style.display = 'flex';
+            });
         }
     </script>
 </body>
