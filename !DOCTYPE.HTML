@@ -21,14 +21,15 @@
             padding: 0 10px; /* Add some padding for better appearance */
         }
         .logo {
-            max-width: 15%; /* Adjust the maximum width of the logo */
-            margin-bottom: 0 auto; /* Add some margin below the logo */
+            max-width: 20%; /* Adjust the maximum width of the logo */
+            margin-bottom: 1px; /* Add some margin below the logo */
         }
         .emoticon {
-            font-size: 10vw; /* Adjust emoticon size relative to the viewport width */
+            font-size: 10.5vw; /* Adjust emoticon size relative to the viewport width */
             cursor: pointer;
             margin: 0 auto; /* Add margin to separate emoticons */
             vertical-align: middle; /* Align emoticons vertically */
+	    
         }
         .loading {
             display: none;
@@ -38,31 +39,43 @@
             display: none;
             color: green;
         }
+        /* Fixed width for the branch selection dropdown */
+        #branch {
+            width: 18vw;
+	    font-size: 2vw;
+	    margin: 0 auto;
+	    margin-top: 10px;
     </style>
 </head>
 <body>
     <div class="container">
-        <img class="logo" src="cvm logo.jpg" alt="Company Logo"> <!-- Adjust src and alt attributes accordingly -->
+      
+        <img class="logo" src="https://www.cvmpawnshops.com/assets/images/resources/official-logo-v2.png" alt="Logo here" style="float:Center"> <!-- Adjust src and alt attributes accordingly -->
         <h1>How do you feel about our services?</h1>
         <div id="status"></div>
         <div class="loading">Submitting...</div>
         <div class="success">Thank you</div>
-        <form id="surveyForm">
+
+        <div id="emoticonContainer">
+            <span class="emoticon" onclick="setEmotion('Very Happy')" title="Very Happy">😄</span>
+            <span class="emoticon" onclick="setEmotion('Happy')" title="Happy">🙂</span>
+            <span class="emoticon" onclick="setEmotion('Sad')" title="Sad">😢</span>
+            <span class="emoticon" onclick="setEmotion('Angry')" title="Angry">😡</span>
+        </div>
+    </div>
+  <form id="surveyForm">
             <input type="hidden" id="emotion" name="emotion">
             <select id="branch" name="branch">
                 <option value="Camarin">Camarin</option>
+                <option value="Bagong Silang">Bagong Silang</option>
+                <option value="Zabarte">Zabarte</option>
+                <option value="Vicas">Vicas</option>
+                <option value="Malhacan">Malhacan</option>
+                <option value="Sauyo">Sauyo</option>
+                <option value="Sangangdaan">Sangangdaan</option>
                 <!-- Add branch options here -->
             </select>
         </form>
-        <div id="emoticonContainer">
-            <span class="emoticon" onclick="setEmotion('Very Happy')">😄</span>
-            <span class="emoticon" onclick="setEmotion('Happy')">🙂</span>
-            <span class="emoticon" onclick="setEmotion('Just OK')">😐</span>
-            <span class="emoticon" onclick="setEmotion('Sad')">😢</span>
-            <span class="emoticon" onclick="setEmotion('Angry')">😡</span>
-        </div>
-    </div>
-
     <script>
         function setEmotion(emotion) {
             document.getElementById('emotion').value = emotion;
