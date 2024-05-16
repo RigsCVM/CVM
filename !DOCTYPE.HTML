@@ -21,13 +21,13 @@
             padding: 0 10px; /* Add some padding for better appearance */
         }
         .logo {
-            max-width: 100px; /* Adjust the maximum width of the logo */
-            margin-bottom: 20px; /* Add some margin below the logo */
+            max-width: 15%; /* Adjust the maximum width of the logo */
+            margin-bottom: 0 auto; /* Add some margin below the logo */
         }
         .emoticon {
             font-size: 10vw; /* Adjust emoticon size relative to the viewport width */
             cursor: pointer;
-            margin: 0 1vw; /* Add margin to separate emoticons */
+            margin: 0 auto; /* Add margin to separate emoticons */
             vertical-align: middle; /* Align emoticons vertically */
         }
         .loading {
@@ -42,7 +42,8 @@
 </head>
 <body>
     <div class="container">
-        <h1>How satisfied are you with our services today?</h1>
+        <img class="logo" src="cvm logo.jpg" alt="Company Logo"> <!-- Adjust src and alt attributes accordingly -->
+        <h1>How do you feel about our services?</h1>
         <div id="status"></div>
         <div class="loading">Submitting...</div>
         <div class="success">Thank you</div>
