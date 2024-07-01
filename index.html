@@ -4,43 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy or Not</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body {
             display: flex;
-            flex-direction: column; /* Align items vertically */
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            font-size: 2vw; /* Adjust font size relative to the viewport width */
+            font-family: 'Poppins', sans-serif;
+            font-size: 2vw;
         }
         .container {
             text-align: center;
-            max-width: 80%; /* Adjust the maximum width as needed */
-            margin: 0 auto; /* Center the container horizontally */
-            padding: 0 10px; /* Add some padding for better appearance */
-            display: none; /* Initially hide container */
+            max-width: 80%;
+            margin: 0 auto;
+            padding: 0 10px;
+            display: none;
         }
         .logo {
-            max-width: 20%; /* Adjust the maximum width of the logo */
-            margin-bottom: 10px; /* Add some margin below the logo */
+            max-width: 20%;
+            margin-bottom: 10px;
         }
         .emoticon {
-            font-size: 10.5vw; /* Adjust emoticon size relative to the viewport width */
+            font-size: 10.5vw;
             cursor: pointer;
-            margin: 0 auto; /* Add margin to separate emoticons */
-            vertical-align: middle; /* Align emoticons vertically */
+            margin: 0 auto;
+            vertical-align: middle;
         }
         .loading, .success {
             display: none;
             margin-top: 10px;
         }
-        /* Fixed width for the branch selection dropdown */
         #branch {
             width: 18vw;
             font-size: 2vw;
             margin: 0 auto;
             margin-top: 10px;
+        }
+        #branchName {
+            margin-top: 20px;
+            font-weight: 600;
         }
     </style>
 </head>
@@ -56,13 +61,13 @@
             <option value="Malhacan">Malhacan</option>
             <option value="Sauyo">Sauyo</option>
             <option value="Sangangdaan">Sangangdaan</option>
-            <!-- Add branch options here -->
         </select>
     </div>
 
     <div class="container" id="surveyContainer">
-        <img class="logo" src="https://www.cvmpawnshops.com/assets/images/resources/official-logo-v2.png" alt="Logo here"> <!-- Adjust src and alt attributes accordingly -->
+        <img class="logo" src="https://www.cvmpawnshops.com/assets/images/resources/official-logo-v2.png" alt="Logo here">
         <h1>How do you feel about our services?</h1>
+        <div id="branchName"></div>
         <div id="status"></div>
         <div class="loading">Submitting...</div>
         <div class="success">Thank you</div>
@@ -89,6 +94,7 @@
             }
 
             document.getElementById('selectedBranch').value = selectedBranch;
+            document.getElementById('branchName').textContent = 'Branch: ' + selectedBranch;
 
             document.getElementById('branchSelection').style.display = 'none';
             document.getElementById('surveyContainer').style.display = 'block';
@@ -117,7 +123,7 @@
                     setTimeout(function() {
                         document.querySelector('.success').style.display = 'none';
                         document.getElementById('emoticonContainer').style.display = 'flex';
-                    }, 5000); // Show emoticons again after 5 seconds
+                    }, 5000);
                 } else {
                     document.getElementById('status').innerHTML = 'Error';
                     document.querySelector('.loading').style.display = 'none';
